@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riemanni summa</title>
+    <link rel='stylesheet' type='text/css' href='css/riemann.css'>
+    <link rel='stylesheet' type='text/css' href='css/main.css'>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src = "js/riemann.js" defer></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    
+    <h1>Riemanni summa</h1>
+
+    <p>
+        Matemaatikas on Riemanni summa teatud tüüpi integraali lähendamine lõpliku summaga. 
+       See on saanud nime 19. sajandi saksa matemaatiku Bernhard Riemanni järgi. Üks väga 
+       levinud rakendus on numbriline integreerimine – ehk funktsioonide või joonte alla jääva 
+       pindala ligikaudne leidmine graafikul –, kus seda tuntakse ka ristkülikumeetodina. Samuti 
+       saab seda kasutada kõverate pikkuse hindamiseks ja muudeks ligikaudseteks arvutusteks.
+    </p>
+
+    <h2>Definitsioon</h2>
+
+    <p>Valime lõigus \([ a, b ]\) punktid</p>
+    <p class = vasakule>\(a = x_1 < x_2 < \dots < x_n = b\)</p>
+    <p>Valime igast osalõigust ühe punkti</p>
+    <p>\(c_i \in [x_{i-1},x_i]\)</p>
+
+    <p>
+        Kui \(f(c_i) \ge 0\), siis \(f(c_i)\Delta x_i\) on ristküliku pindala.
+         Kui \(f(c_i) \lt 0\), siis paikneb vastav ristkülik x-teljest allpool ja korrutis \(f(c_i)\Delta x_i\) annab selle pindala miinusmärgiga.
+    </p>
+
+    <p>Summat</p>
+    
+    <div class="formula-container">
+        $$\sigma(f, T, c) = \sum_{i=1}^{n} f(c_i)\Delta x_i$$
+    </div>
+    
+    <p>nimetatakse Riemanni summaks lõigus \([ a, b ]\)</p>
+
+    <p>
+        Riemanni summa sõltub nii alajaotuse \(T\) valikust kui ka punktide \(c_i\) valikust. 
+        Meid huvitab olukord, kus alajaotuse kõik osalõigud muutuvad järjest lühemaks, s.t \(d(T)→0\). 
+        Kui vastavad Riemanni summad lähenevad sõltumata alajaotuse ja punktide \(c_i\) valikust 
+        ühele ja samale arvule \(I\), siis kirjutame
+    </p>
+
+    <p class = "formula-container">$$I = \lim_{d(T) \to 0} \sigma(f, T, c)$$</p>
+
+    <p>Ehk siis, piisavalt väikse alajotuse diameetri korral, saab Riemanni summa teha arvule \(I\)
+        kuitahes lähedaseks ning tulemus ei sõltu sellest, millised punktid \(c_i\) osa lõikudes valiti.</p>
+
+    <canvas id="myCanvas" width="canvas_size" height="600" style="border:1px solid black;"></canvas>
+    
+
+    <div class="slidecontainer">
+        <input type="range" min="1" max="100" value="10" class="slider" id="myRange">
+        <p>Ristkülikuid ühel poolel: <span id="demo"></span></p>
+        <p>Summa: <span id="sum"></span> \((ü^2)\)</p>
+    </div>
+
+    <script src = "js/riemann.js"></script>
+
+</body>
+</html>
