@@ -1,0 +1,13 @@
+math {
+    /* Vaikimisi ära "krimpsuta kokku" murde ja teisi suuri avaldisi*/
+    math-style: normal;
+}
+
+.blockmath {
+    display: block;
+}
+
+.inlinemath {
+    display: inline;
+    math-style: compact;
+}

@@ -1,33 +1,503 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="et">
     <head>
+        <meta charset="utf-8">
         <title>L'Hospitali reegel</title>
         <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/lhospital.css">
     </head>
     <body>
         <h1>L'Hospitali reegel</h1>
-        <p>Oletame, et on kaks funktsiooni f(x) ja g(x) ja nende mõlema piirväärtus mõnes punktis x=a on 0.</p>
-        <math><mrow><munder><mi>lim</mi><mrow>x → a</mrow></munder>f(x)<mo>=</mo>0</mrow></math>
-        <math><mrow><munder><mi>lim</mi><mrow>x → a</mrow></munder>f(x)<mo>=</mo>0</mrow></math>
-        <p>Siis on nende kahe funktsiooni jagatise piirväärtus võrdne nende tuletiste piirväärtustega.</p>
-        <math display="block">
-            <munder>
-                <mi>lim</mi>
-                <mrow>x → a</mrow>
-            </munder>
-            <mfrac>
-                <mrow>f(x)</mrow>
-                <mrow>g(x)</mrow>
-            </mfrac>
+
+        <p>
+            Oletame, et meil on funktsioon:
+        </p>
+
+        <math class="blockmath">
+            <mi>f</mi>
+            <mo>(</mo>
+            <mi>x</mi>
+            <mo>)</mo>
             <mo>=</mo>
-                        <munder>
-                <mi>lim</mi>
-                <mrow>x → a</mrow>
-            </munder>
             <mfrac>
-                <mrow>f<mo>'</mo>(x)</mrow>
-                <mrow>g<mo>'</mo>(x)</mrow>
+                <mrow>
+                    <mn>3</mn><mi>ln</mi><mi>x</mi>
+                </mrow>
+                <mrow>
+                    <mn>1</mn>
+                    <mo>-</mo>
+                    <msup><mi>x</mi><mn>2</mn></msup>
+                </mrow>
             </mfrac>
         </math>
+
+        <p>
+            Selle funktsiooni graafik näeb välja selline:
+        </p>
+
+        <!--Graafik läheb siia-->
+
+        <p>
+            Graafikult näib see funktsioon oma määramispiirkonnas pidev.
+            Samas teame, et jagamistehe on defineerimata, kui jagaja on
+            <math class="inlinemath"><mn>0</mn></math>.
+            Seega pole meie funktsioon defineeritud kohal
+            <math class="inlinemath"><mi>x</mi><mo>=</mo><mn>1</mn></math>,
+            sest sel juhul oleks avaldis selline:
+        </p>
+        
+        <math class="blockmath">
+            <mfrac>
+                <mrow>
+                    <mn>3</mn><mo>ln</mo><mo></mo><mn>1</mn>
+                </mrow>
+                <mrow>
+                    <mn>1</mn>
+                    <mo>-</mo>
+                    <msup><mn>1</mn><mn>2</mn></msup>
+                </mrow>
+            </mfrac>
+            <mo>=</mo>
+            <mfrac>
+                <mrow>
+                    <mn>0</mn>
+                </mrow>
+                <mrow>
+                    <mn>0</mn>
+                </mrow>
+            </mfrac>
+        </math>
+
+        <p>
+            Kuigi funktsioon ei ole defineeritud kohal
+            <math class="inlinemath"><mi>x</mi><mo>=</mo><mn>1</mn></math>,
+            siis vähemalt graafikult paistab, nagu funktsioon läheneks mõnele väärtusele
+            - ehk selle piirväärtus võiks ikka olemas olla:
+        </p>
+        <math class="blockmath">
+            <munder>
+                <mi>lim</mi>
+                <mrow><mi>x</mi><mo>→</mo><mn>1</mn></mrow>
+            </munder>
+            <mfrac>
+                <mrow>
+                    <mn>3</mn><mi>ln</mi><mi>x</mi>
+                </mrow>
+                <mrow>
+                    <mn>1</mn>
+                    <mo>-</mo>
+                    <msup><mi>x</mi><mn>2</mn></msup>
+                </mrow>
+            </mfrac>
+        </math>
+        <p>
+            Kui aga
+            <math class="inlinemath"><mi>x</mi></math>
+            otse sinna sisse asendada, tekib sarnaselt eelmise olukorraga määramatus
+            <math class="inlinemath">
+                <mfrac>
+                    <mrow>
+                        <mn>0</mn>
+                    </mrow>
+                    <mrow>
+                        <mn>0</mn>
+                    </mrow>
+                </mfrac>
+            </math>.
+            Kuidas sellest määramatusest lahti saada?
+            Näiteks avaldist algebraliselt lihtsustada ei saa.
+        </p>
+
+        <!--Siin võiks olla mõni mõtlemapanev paus, äkki mingid
+        ilusti disainitud mõttepunktid (...)
+        või horisontaalne joon-->
+        <br>
+
+        <p>
+            Vastuseni jõudmiseks kujutame murrujoone kohal oleva avaldise
+            <math class="inlinemath">
+                <mn>3</mn><mi>ln</mi><mi>x</mi>
+            </math>
+            ning sellest allpool oleva avaldise
+            <math class="inlinemath">
+                <mn>1</mn>
+                <mo>-</mo>
+                <msup><mi>x</mi><mn>2</mn></msup>
+            </math>
+            eraldi funktsioonidena. Allpool on näha nende graafikud eraldi.
+        </p>
+
+        <!--3ln(x) ja 1-x^2 graafikud, äkki x=1 on kuidagi esile toodud-->
+
+        <p>
+            Nagu näha, on tõepoolest kohal 
+            <math class="inlinemath"><mi>x</mi><mo>=</mo><mn>1</mn></math>
+            mõlemate funktsioonide väärtus
+            <math class="inlinemath"><mn>0</mn></math>.
+            Üks huvitav omadus ilmneb, kui sellele kohale sisse suurendada:
+        </p>
+
+        <!--
+        3ln(x) ja -x^2 graafikud koos nupuga,
+        millele vajutades suurendatakse sisse kohale x=1
+        -->
+
+        <p>
+            Mida lähemal me oleme kohale 
+            <math class="inlinemath"><mi>x</mi><mo>=</mo><mn>1</mn></math>,
+            seda "lineaarsemad" need funktsioonid tunduvad. Piirväärtust leides me tahamegi
+            teada funktsioonide väärtusi, kui
+            <math class="inlinemath"><mi>x</mi></math>
+            on kindlale kohale väga lähedal.
+            Seega antud piirväärtuse sees me võime kohelda funktsioone kui lineaarseid.
+        </p>
+
+        <p>
+            Seda tõika teades võime proovida piirväärtust leida.
+            Meeldetuletuseks, piirväärtus annab meile funktsiooni väärtuse siis, kui
+            <math class="inlinemath"><mi>x</mi></math>
+            on mõnele kindlale väärtusele väga lähedal, kuid mitte sellega võrdne.
+            Seetõttu tahaksime teada funktsioonide jagatist, kui 
+            <math class="inlinemath"><mi>x</mi></math>
+            on peaaegu
+            <math class="inlinemath"><mn>1</mn></math>,
+            kuid mitte täpselt
+            <math class="inlinemath"><mn>1</mn></math>.
+            Võiksime vaadata 
+            <math class="inlinemath">
+                <mn>3</mn><mi>ln</mi><mi>x</mi>
+            </math>
+            ning
+            <math class="inlinemath">
+                <mn>1</mn>
+                <mo>-</mo>
+                <msup><mi>x</mi><mn>2</mn></msup>
+            </math>
+            väärtusi kohal
+            <math class="inlinemath"><mn>1</mn><mo>+</mo><mi>h</mi></math>,
+            kus
+            <math class="inlinemath"><mi>h</mi></math>
+            on väga väike number, näiteks
+            <math class="inlinemath"><mn>0,01</mn></math>.
+        </p>
+
+        <!--sisse suurendatud graafik, kus on märge kohal x+h
+            ning punktiir x-teljelt funktsioonide graafikuteni
+        -->
+        
+        <p>
+            Kohal
+            <math class="inlinemath">
+                <mi>x</mi><mo>=</mo><mn>1</mn><mo>+</mo><mi>h</mi>
+            </math>
+            oleks muidu murrujoone kohal oleva funktsiooni väärtus
+            <math class="inlinemath">
+                <mn>3</mn><mi>ln</mi><mo>(</mo><mn>1</mn><mo>+</mo><mi>h</mi><mo>)</mo>
+            </math>.
+            Teeskleme aga, et tegemist on lineaarse funktsiooniga, mille tõus oleks näiteks
+            <math>
+                <msub>
+                    <mi>k</mi>
+                    <mn>1</mn>
+                </msub>
+            </math>.
+            Selle lineaarse funktsiooni väärtus oleks samal kohal
+            <math class="inlinemath">
+                <msub><mi>k</mi><mn>1</mn></msub>
+                <mi>h</mi>
+            </math>.
+        </p>
+
+        <!--graafik, kus on tegelik funktsioon ja sama tõusuga lineaarne funktsioon
+            ning on samuti märge kohal x+h
+        -->
+
+        <p>
+            Mida suurem on
+            <math class="inlinemath">
+                <mi>h</mi>
+            </math>,
+            seda ebatäpsem meie lineaarne avaldis on.
+            Kui aga
+            <math class="inlinemath">
+                <mi>h</mi>
+            </math>
+            läheneb nullile, läheneb lineaarne võrrand funktsiooni päris väärtusele.
+        </p>
+
+        <p>
+            Sama saab teha murrujoonest allpool oleva funktsiooniga. Selle tegelik väärtus kohal
+            <math class="inlinemath">
+                <mn>1</mn><mo>+</mo><mi>h</mi>
+            </math>
+            oleks
+            <math class="inlinemath">
+                <mn>1</mn>
+                <mo>-</mo>
+                <mo>(</mo>
+                <mn>1</mn>
+                <mo>+</mo>
+                <mi>h</mi>
+                <msup>
+                    <mo>)</mo>
+                    <mn>2</mn>
+                </msup>
+            </math>,
+            kuid selle väärtust saame samamoodi umbkaudselt hinnata lineaarfunktsiooniga.
+            Ütleme, et tegemist on lineaarse funktsiooniga, mille tõus oleks
+            <math class="inlinemath">
+                <msub>
+                    <mi>k</mi>
+                    <mn>2</mn>
+                </msub>
+            </math>
+            ja selle väärtus kohal
+            <math class="inlinemath">
+                <mn>1</mn>
+                <mo>+</mo>
+                <mi>h</mi>
+            </math>
+            oleks
+            <math class="inlinemath">
+                <msub><mi>k</mi><mn>2</mn></msub>
+                <mi>h</mi>
+            </math>.
+        </p>
+
+        <!--graafik, kus on tegelik funktsioon ja sama tõusuga lineaarne funktsioon
+            ning on samuti märge kohal x+h
+        -->
+
+        <p>
+            Miks me seda kõike tegime?
+            Sellepärast, et nüüd saame leida kahe lineaarfunktsiooni jagatise kohal
+            <math class="inlinemath">
+                <mi>x</mi><mo>+</mo><mi>h</mi>
+            </math>.
+            See oleks siis
+        </p>
+
+        <math class="blockmath">
+            <mfrac>
+                <mrow>
+                    <msub><mi>k</mi><mn>1</mn></msub><mi>h</mi>
+                </mrow>
+                <mrow>
+                    <msub><mi>k</mi><mn>2</mn></msub><mi>h</mi>
+                </mrow>
+            </mfrac>
+            <mo>=</mo>
+            <mfrac>
+                <mrow>
+                    <msub><mi>k</mi><mn>1</mn></msub>
+                </mrow>
+                <mrow>
+                    <msub><mi>k</mi><mn>2</mn></msub>
+                </mrow>
+            </mfrac>
+        </math>
+
+        <p>
+            Kuna väga lähedal kohale
+            <math class="inlinemath">
+                <mi>x</mi>
+                <mo>=</mo>
+                <mn>1</mn>
+            </math>
+            lähenevad lineaarfunktsioonide väärtused funktsioonide päris väärtusele,
+            siis nende jagatis läheneb funktsioonide päris jagatisele. Teisisõnu:
+        </p>
+
+        <math class="blockmath">
+            <munder>
+                <mi>lim</mi>
+                <mrow><mi>x</mi><mo>→</mo><mn>1</mn></mrow>
+            </munder>
+            <mfrac>
+                <mrow>
+                    <mn>3</mn><mi>ln</mi><mi>x</mi>
+                </mrow>
+                <mrow>
+                    <mn>1</mn>
+                    <mo>-</mo>
+                    <msup><mi>x</mi><mn>2</mn></msup>
+                </mrow>
+            </mfrac>
+
+            <mo>=</mo>
+
+            <munder>
+                <mi>lim</mi>
+                <mrow><mi>x</mi><mo>→</mo><mn>1</mn></mrow>
+            </munder>
+            <mfrac>
+                <mrow>
+                    <msub><mi>k</mi><mn>1</mn></msub>
+                </mrow>
+                <mrow>
+                    <msub><mi>k</mi><mn>2</mn></msub>
+                </mrow>
+            </mfrac>
+        </math>
+
+        <p>
+            Nüüd ainukese asjana oleks vaja veel leida tõusud
+            <math class="inlinemath">
+                <msub>
+                    <mi>k</mi>
+                    <mn>1</mn>
+                </msub>
+            </math>
+            ja
+            <math class="inlinemath">
+                <msub>
+                    <mi>k</mi>
+                    <mn>2</mn>
+                </msub>
+            </math>.
+
+            Selleks peame leida funktsioonide päris tõusud kohal
+            <math class="inlinemath">
+                <mi>x</mi>
+                <mo>=</mo>
+                <mn>1</mn>
+            </math>.
+            Funktsiooni tõusu saab muidugi arvutada selle tuletiste abil.
+        </p>
+
+        <math class="blockmath">
+            <munder>
+                <mi>lim</mi>
+                <mrow><mi>x</mi><mo>→</mo><mn>1</mn></mrow>
+            </munder>
+            <mfrac>
+                <mrow>
+                    <msub><mi>k</mi><mn>1</mn></msub>
+                </mrow>
+                <mrow>
+                    <msub><mi>k</mi><mn>2</mn></msub>
+                </mrow>
+            </mfrac>
+
+            <mo>=</mo>
+
+            <munder>
+                <mi>lim</mi>
+                <mrow><mi>x</mi><mo>→</mo><mn>1</mn></mrow>
+            </munder>
+            <mfrac>
+                <mrow>
+                    <mo>(</mo><mn>3</mn><mi>ln</mi><mi>x</mi><mo>)</mo><mo>&prime;</mo>
+                </mrow>
+                <mrow>
+                    <mo>(</mo>
+                    <mn>1</mn>
+                    <mo>-</mo>
+                    <msup><mi>x</mi><mn>2</mn></msup>
+                    <mo>)</mo><mo>&prime;</mo>
+                </mrow>
+            </mfrac>
+
+            <mo>=</mo>
+
+            <munder>
+                <mi>lim</mi>
+                <mrow><mi>x</mi><mo>→</mo><mn>1</mn></mrow>
+            </munder>
+            <mfrac>
+                <mrow>
+                    <mfrac>
+                        <mn>3</mn>
+                        <mn>x</mn>
+                    </mfrac>
+                </mrow>
+                <mrow>
+                    <mo>-</mo>
+                    <mn>2</mn>
+                    <mi>x</mi>
+                </mrow>
+            </mfrac>
+
+            <mo>=</mo>
+
+            <mfrac>
+                <mrow>
+                    <mn>3</mn>
+                </mrow>
+                <mrow>
+                    <mo>-</mo>
+                    <mn>2</mn>
+                </mrow>
+            </mfrac>
+
+            <mo>=</mo>
+
+            <mo>-</mo>
+            <mn>1.5</mn>
+        </math>
+
+        <p>
+            Leidsimegi funktsioonide jagatise, kui
+            <math class="inlinemath">
+                <mi>x</mi>
+            </math>
+            läheneb väärtusele
+            <math class="inlinemath">
+                <mi>3</mi>
+            </math>
+            ning selleks kasutasime funktsioonide tuletisi antud kohas.
+        </p>
+
+        <!--Algse funktsiooni graafik punktiiriga y=-1.5-->
+        
+        <p>
+            Üldistades saamegi L'Hospitali reegli:
+        </p>
+
+        <math>
+            <munder>
+                <mi>lim</mi>
+                <mrow><mi>x</mi><mo>→</mo><mn>a</mn></mrow>
+            </munder>
+            <mfrac>
+                <mrow>
+                    <mi>f</mi>
+                    <mo>(</mo>
+                    <mi>x</mi>
+                    <mo>)</mo>
+                </mrow>
+                <mrow>
+                    <mi>g</mi>
+                    <mo>(</mo>
+                    <mi>x</mi>
+                    <mo>)</mo>
+                </mrow>
+            </mfrac>
+
+            <mo>=</mo>
+
+            <munder>
+                <mi>lim</mi>
+                <mrow><mi>x</mi><mo>→</mo><mn>a</mn></mrow>
+            </munder>
+            <mfrac>
+                <mrow>
+                    <mi>f</mi>
+                    <mo>&prime;</mo>
+                    <mo>(</mo>
+                    <mi>x</mi>
+                    <mo>)</mo>
+                </mrow>
+                <mrow>
+                    <mi>g</mi>
+                    <mo>&prime;</mo>
+                    <mo>(</mo>
+                    <mi>x</mi>
+                    <mo>)</mo>
+                </mrow>
+            </mfrac>
+        </math>
+
     </body>
 </html>
