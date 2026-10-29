@@ -1,9 +1,5 @@
 const canvas = document.getElementById("myCanvas");
 const ctx = canvas.getContext("2d");
-const size = document.getElementById()
-
-
-const canvas_size = screen.width * 70%
 
 function teljed() {
     
