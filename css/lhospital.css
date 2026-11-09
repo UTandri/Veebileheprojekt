@@ -1,7 +1,7 @@
 math {
     /*
     Vaikimisi ära "krimpsuta kokku" murde ja teisi suuri avaldisi
-    See omadus tekitab CSS validaatoris hoiatusi, samas peaks laialdaselt toetatud olema
+    See omadus tekitab küll CSS validaatoris hoiatusi, samas peaks laialdaselt toetatud olema
     */
     math-style: normal;
 }
@@ -13,4 +13,10 @@ math {
 .inlinemath {
     display: inline;
     math-style: compact;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 300px;
 }
