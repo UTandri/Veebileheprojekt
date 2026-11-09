@@ -1,5 +1,8 @@
 math {
-    /* Vaikimisi ära "krimpsuta kokku" murde ja teisi suuri avaldisi*/
+    /*
+    Vaikimisi ära "krimpsuta kokku" murde ja teisi suuri avaldisi
+    See omadus tekitab CSS validaatoris hoiatusi, samas peaks laialdaselt toetatud olema
+    */
     math-style: normal;
 }
 
