@@ -47,3 +47,8 @@ body {
   background: #04AA6D;
   cursor: pointer;
 }
+
+#myCanvas {
+  width: 100%;
+  height: auto;
+}

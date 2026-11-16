@@ -3,26 +3,75 @@ const ctx = canvas.getContext("2d");
 
 function teljed() {
     ctx.beginPath();
-    ctx.strokeStyle = "gray"
+    ctx.strokeStyle = "black"
     ctx.moveTo(0, 400);
     ctx.lineTo(1200, 400);
     ctx.stroke();
 
     ctx.beginPath();
-    ctx.strokeStyle = "gray"
+    ctx.strokeStyle = "#d3d3d3"
+    ctx.moveTo(0, 100);
+    ctx.lineTo(1200, 100);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.strokeStyle = "#d3d3d3"
+    ctx.moveTo(0, 200);
+    ctx.lineTo(1200, 200);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.strokeStyle = "#d3d3d3"
+    ctx.moveTo(0, 300);
+    ctx.lineTo(1200, 300);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.strokeStyle = "#d3d3d3"
+    ctx.moveTo(0, 500);
+    ctx.lineTo(1200, 500);
+    ctx.stroke();
+
+
+
+    ctx.beginPath();
+    ctx.strokeStyle = "black"
     ctx.moveTo(200, 0);
     ctx.lineTo(200, 600);
     ctx.stroke();
 
     ctx.beginPath();
-    ctx.strokeStyle = "gray"
+    ctx.strokeStyle = "#d3d3d3"
+    ctx.moveTo(400, 0);
+    ctx.lineTo(400, 600);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.strokeStyle = "#d3d3d3"
+    ctx.moveTo(600, 0);
+    ctx.lineTo(600, 600);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.strokeStyle = "#d3d3d3"
+    ctx.moveTo(800, 0);
+    ctx.lineTo(800, 600);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.strokeStyle = "#d3d3d3"
+    ctx.moveTo(1000, 0);
+    ctx.lineTo(1000, 600);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.strokeStyle = "red"
     ctx.moveTo(0, 600);
     ctx.lineTo(1200, 0);
     ctx.stroke();
 }
 
 var slider = document.getElementById("myRange");
-var slider2 = document.getElementById("c_vaartus");
 var output = document.getElementById("demo");
 var sum = document.getElementById("sum");
 var n = Number(slider.value);
@@ -52,14 +101,14 @@ function pikkus(pos_x) {
 }
 
 function joonesta(pos_x, l, p, pos_y) {
-    ctx.strokeStyle = "red"
-    
+    ctx.strokeStyle = "blue"
     ctx.beginPath();
     ctx.globalAlpha = 0.2;
     ctx.rect(pos_x, pos_y, l, p);
     ctx.fillStyle = "blue";
     ctx.fill();
     ctx.stroke();
+    ctx.globalAlpha = 1;
 }
 
 function tsykkel_pos(ristkylik, pikkus, l, neg){
