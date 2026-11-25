@@ -3,33 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kõrgem matemaatika</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Kõrgema Matemaatika abi</title>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 
     <header class="site-header">
-        <div class="logo">Kõrgema Matemaatika abi </div>
-        <nav class="nav-links">
-            <a href="index.html">Avaleht</a>
-            <a href="lhospital.html">L'Hospitali reegel</a>
-            <a href="integraal.html">Riemanni integraal</a>
-        </nav>
+        <div class="header-container">
+            <h1 class="logo">Kõrgema Matemaatika abi</h1>
+            <nav class="nav-links">
+                <a href="index.html" class="active">Avaleht</a>
+                <a href="lhospital.html">L'Hospitali reegel</a>
+                <a href="riemann.html">Riemanni integraal</a>
+            </nav>
+        </div>
     </header>
 
     <main>
-        <div class="hero-banner">
-            <h1>Tere tulemast kõrgema matemaatika õppimise lehele!</h1>
-            <p>See veebileht on loodud rühmatöö raames ja tutvustab kõrgema matemaatika olulisi teemasid.</p>
-        </div>
-        
-        <div class="content-box">
-            <img src="https://images.unsplash.com/photo-1509228468518-180dd4864904?q=80&w=1000&auto=format&fit=crop" alt="Matemaatika" class="hero-image">
-        </div>
+        <section class="hero-section">
+            <h2>Tere tulemast kõrgema matemaatika õppimise lehele!</h2>
+            <p>See veebileht on loodud rühmatöö raames ja tutvustab kõrgema matemaatika peamiseid olulisi teemasid. Vali allpool teema, millega soovid tutvuda.</p>
+        </section>
+
+        <section class="topics-grid">
+            <a href="lhospital.html" class="topic-card">
+                <div class="card-content">
+                    <h3>L'Hospitali reegel</h3>
+                    <p>Õpi kasutama tuletisi määramatuste (0/0 ja &infin;/&infin;) arvutamiseks piirväärtustes.</p>
+                    <span class="card-btn">Loe lähemalt &rarr;</span>
+                </div>
+            </a>
+
+            <a href="riemann.html" class="topic-card">
+                <div class="card-content">
+                    <h3>Riemanni integraal</h3>
+                    <p>Tutvu määratud integraali geomeetrilise tähenduse ja kõverjoonelise trapetsi pindala arvutamisega.</p>
+                    <span class="card-btn">Loe lähemalt &rarr;</span>
+                </div>
+            </a>
+        </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 Informaatika rühmatöö</p>
+        <p>&copy; 2026 Kõrgema Matemaatika abi — Informaatika rühmatöö</p>
     </footer>
 
 </body>
