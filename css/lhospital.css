@@ -1,3 +1,7 @@
+body {
+    margin: 40px;
+}
+
 math {
     /*
     Vaikimisi ära "krimpsuta kokku" murde ja teisi suuri avaldisi
@@ -19,5 +23,8 @@ canvas {
     display: block;
     margin: 0 auto;
     width: 100%;
-    aspect-ratio: 1280 / 300;
+    aspect-ratio: 1280 / 500;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: gray;
 }
