@@ -1,31 +1,54 @@
-const canvas = document.getElementById("fx");
-const ctx = canvas.getContext("2d");
-const algne_suum = 30.0;
 const suumimistegur = 1.3;
+const algne_suum = 30.0;
 
-let suum = algne_suum;
-let niheX = 0;
-let niheY = 0;
+const suurendatud_niheX = -450;
+const suurendatud_niheY = 0;
+const suurendatud_suum = 500;
 
-function suumiSisse() {
+const lõuendid = document.querySelectorAll(".lhospitalgraafik");
+
+function seaAlgneVaade(lõuend) {
+    if (lõuend.indeks == 2 || lõuend.indeks == 3) {
+        lõuend.suum = suurendatud_suum;
+        lõuend.niheX = suurendatud_niheX;
+        lõuend.niheY = suurendatud_niheY;
+    } else {
+        lõuend.suum = algne_suum;
+        lõuend.niheX = 0;
+        lõuend.niheY = 0;
+    }
+}
+
+
+for (var i = 0; i < lõuendid.length; i++) {
+    lõuendid[i].kontekst = lõuendid[i].getContext("2d");
+    lõuendid[i].indeks = i;
+
+    seaAlgneVaade(lõuendid[i]);
+}
+
+function suumi(tegur, lõuend) {
     // korrutame nihet ka suumimisteguriga, et lõuendi keskkoht jääks paigale
-    suum *= suumimistegur;
-    niheX *= suumimistegur;
-    niheY *= suumimistegur;
-    joonista();
+    lõuend.suum *= tegur;
+    lõuend.niheX *= tegur;
+    lõuend.niheY *= tegur;
+    joonista(lõuend);
 }
-function suumiVälja() {
-    suum /= suumimistegur;
-    niheX /= suumimistegur;
-    niheY /= suumimistegur;
-    joonista();
+
+function suumiSisse(e) {
+    indeks = e.target.dataset.graafikuNumber.toString();
+    suumi(suumimistegur, lõuendid[indeks]);
 }
-function lähtestaVaade() {
-    suum = algne_suum;
-    niheX = 0;
-    niheY = 0;
-    joonista();
+function suumiVälja(e) {
+    indeks = e.target.dataset.graafikuNumber.toString();
+    suumi(1/suumimistegur, lõuendid[indeks]);
 }
+function lähtestaVaade(e) {
+    indeks = e.target.dataset.graafikuNumber.toString();
+    seaAlgneVaade(lõuendid[indeks]);
+    joonista(lõuendid[indeks]);
+}
+
 
 let tõmbame = false;
 let hiireViimaneX = 0;
@@ -34,49 +57,63 @@ let hiireViimaneY = 0;
 // hiire tagasikutsed, millega saab tõmbamist implementeerida
 // allikas: https://stackoverflow.com/a/15037102
 
-// hiirenupp alla, alustame tõmmet
-canvas.onmousedown = function(e) {
-    hiireViimaneX = parseInt(e.clientX);
-    hiireViimaneY = parseInt(e.clientY);
-    tõmbame = true;
-}
+for (var i = 0; i < lõuendid.length; i++) {
+    const praeguneLõuend = lõuendid[i];
 
-// kui hiirenupp lastakse üles või hiir lahkub lõuendilt, katkestame tõmbamise
-canvas.onmouseup = function(e) {
-    tõmbame = false;
-}
-canvas.onmouseout = function(e) {
-    tõmbame = false;
-}
-
-// hiire liigutamise tagasikutsel ja tõmmates uuendame nihet ja joonistame ümber
-canvas.onmousemove = function(e){
-    if(tõmbame){
-        niheX += parseInt(e.clientX) - hiireViimaneX;
-        niheY += parseInt(e.clientY) - hiireViimaneY;
+    // hiirenupp alla, alustame tõmmet
+    praeguneLõuend.onmousedown = function(e) {
         hiireViimaneX = parseInt(e.clientX);
         hiireViimaneY = parseInt(e.clientY);
-
-        joonista();
+        tõmbame = true;
     }
+
+    // kui hiirenupp lastakse üles või hiir lahkub lõuendilt, katkestame tõmbamise
+    praeguneLõuend.onmouseup = function(e) {
+        tõmbame = false;
+    }
+    praeguneLõuend.onmouseout = function(e) {
+        tõmbame = false;
+    }
+
+    // hiire liigutamise tagasikutsel ja tõmmates uuendame nihet ja joonistame ümber
+    praeguneLõuend.onmousemove = function(e){
+        if(tõmbame){
+            praeguneLõuend.niheX += parseInt(e.clientX) - hiireViimaneX;
+            praeguneLõuend.niheY += parseInt(e.clientY) - hiireViimaneY;
+            hiireViimaneX = parseInt(e.clientX);
+            hiireViimaneY = parseInt(e.clientY);
+
+            joonista(praeguneLõuend);
+        }
+    }
+
+    // suumimine hiirerullikuga
+    praeguneLõuend.addEventListener("wheel", function(e) {
+        // peatame lehel allakerimise, kui tahame hoopis graafikut suurendada
+        e.preventDefault();
+
+        var tegur = Math.max(-5, Math.min(5, e.deltaY));
+        tegur = 1 - tegur / 150;
+        suumi(tegur, praeguneLõuend);
+    });
 }
-
-// suumimine hiirerullikuga
-canvas.addEventListener("wheel", function(e) {
-    // peatame lehel allakerimise, kui tahame hoopis graafikut suurendada
-    e.preventDefault();
-
-    if (e.deltaY > 0) {
-        suumiVälja();
-    } else {
-        suumiSisse();
-    }
-})
 
 
 // f(x) funktsioon, mida tahame joonistada
 function f(x) {
     return (3 * Math.log(x)) / (1 - x*x);
+}
+
+function kolmlnx(x) {
+    return 3 * Math.log(x);
+}
+
+function üksmiinusxruudus(x) {
+    return 1 - x*x;
+}
+
+function kolmx(x) {
+    return 3 * x - 3;
 }
 
 // lõuend joonistab kõige teravamalt, kui koordinaadi murdosa on .5
@@ -86,12 +123,12 @@ function terav(x) {
 }
 
 // võtavad matemaatilise koordinaadi ja annavad vastava koordinaadi lõuendil
-function lõuendiX(x) {
-    return suum * x + canvas.width / 2 + niheX;
+function lõuendiX(x, lõuend) {
+    return lõuend.suum * x + lõuend.width / 2 + lõuend.niheX;
 }
 
 var eelmineY;
-function lõuendiY(y) {
+function lõuendiY(y, lõuend) {
     if (Number.isNaN(y)) {
         // kui y on määramata, kasutame eelmist
         y = eelmineY;
@@ -103,102 +140,160 @@ function lõuendiY(y) {
     }
 
     eelmineY = y;
-    return canvas.height / 2 - suum * y + niheY;
+    return lõuend.height / 2 - lõuend.suum * y + lõuend.niheY;
 }
 
 // võtavad koordinaadi lõuendil ja annavad vastava matemaatilise koordinaadi
-function matemaatilineX(x) {
-    return (x - niheX - canvas.width / 2) / suum;
+function matemaatilineX(x, lõuend) {
+    return (x - lõuend.niheX - lõuend.width / 2) / lõuend.suum;
 }
-function matemaatilineY(y) {
-    return -(y - niheY - canvas.height / 2) / suum;
+function matemaatilineY(y, lõuend) {
+    return -(y - lõuend.niheY - lõuend.height / 2) / lõuend.suum;
 }
 
-function joonista() {
-    // kustuta lõuend
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+function joonistaTaust(l) {
+    // ruudustik ja ühikud
 
-    // joonistame ruudustiku ja ühikud
-
-    ctx.strokeStyle = "lightgrey";
-    ctx.lineWidth = 1;
-    ctx.font = "20px serif";
+    l.kontekst.strokeStyle = "lightgrey";
+    l.kontekst.lineWidth = 1;
+    l.kontekst.font = "20px serif";
     // mida väiksem suum, seda rohkem jätame ühikuid vahele
-    numvahe = Math.max(1, Math.floor(90/suum));
+    numvahe = Math.max(1, Math.floor(90/l.suum));
 
     // horisontaalsed jooned
-    var algus = Math.floor(matemaatilineY(canvas.height)) - 1;
-    var lõpp = Math.floor(matemaatilineY(0)) + 1;
+    var algus = Math.floor(matemaatilineY(l.height, l)) - 1;
+    var lõpp = Math.floor(matemaatilineY(0, l)) + 1;
 
     for (var y = algus; y < lõpp; y += 1) {
-        ctx.beginPath();
-        ctx.moveTo(0, lõuendiY(y));
-        ctx.lineTo(terav(canvas.width), lõuendiY(y));
-        ctx.stroke();
+        l.kontekst.beginPath();
+        l.kontekst.moveTo(0, lõuendiY(y, l));
+        l.kontekst.lineTo(terav(l.width), lõuendiY(y, l));
+        l.kontekst.stroke();
 
         if (y % numvahe == 0) {
-            ctx.fillText(y.toString(), lõuendiX(0.1), lõuendiY(y)+8);
+            l.kontekst.fillText(y.toString(), lõuendiX(0.1, l), lõuendiY(y, l)+8);
         }
     }
 
     // vertikaalsed jooned
-    algus = Math.floor(matemaatilineX(0)) - 1;
-    lõpp = Math.floor(matemaatilineX(canvas.width)) + 1;
+    algus = Math.floor(matemaatilineX(0, l)) - 1;
+    lõpp = Math.floor(matemaatilineX(l.width, l)) + 1;
 
     for (var x = algus; x < lõpp; x += 1) {
-        ctx.beginPath();
-        ctx.moveTo(lõuendiX(x), 0);
-        ctx.lineTo(lõuendiX(x), terav(canvas.height));
-        ctx.stroke();
+        l.kontekst.beginPath();
+        l.kontekst.moveTo(lõuendiX(x, l), 0);
+        l.kontekst.lineTo(lõuendiX(x, l), terav(l.height));
+        l.kontekst.stroke();
         if (x % numvahe == 0 && x != 0) {
-            ctx.fillText(x.toString(), lõuendiX(x)-7, lõuendiY(0));
+            l.kontekst.fillText(x.toString(), lõuendiX(x, l)-7, lõuendiY(0, l)+8);
         }
     }
 
     // joonistame teljed
 
-    ctx.strokeStyle = "gray";
-    ctx.lineWidth = 1
+    l.kontekst.strokeStyle = "gray";
+    l.kontekst.lineWidth = 1
 
     // x-telg
-    ctx.beginPath();
-    ctx.moveTo(0, canvas.height/2+niheY);
-    ctx.lineTo(terav(canvas.width), terav(canvas.height/2)+niheY);
-    ctx.stroke();
+    l.kontekst.beginPath();
+    l.kontekst.moveTo(0, l.height/2+l.niheY);
+    l.kontekst.lineTo(terav(l.width), terav(l.height/2)+l.niheY);
+    l.kontekst.stroke();
 
     // y-telg
-    ctx.beginPath();
-    ctx.moveTo(terav(canvas.width/2)+niheX, 0);
-    ctx.lineTo(terav(canvas.width/2)+niheX, terav(canvas.height));
-    ctx.stroke();
+    l.kontekst.beginPath();
+    l.kontekst.moveTo(terav(l.width/2)+l.niheX, 0);
+    l.kontekst.lineTo(terav(l.width/2)+l.niheX, terav(l.height));
+    l.kontekst.stroke();
+}
 
-    // joonista graafik
-    ctx.beginPath();
+function joonistaGraafik(l, funktsioon, värv) {
+
+    l.kontekst.beginPath();
     // lisame +10, et ümardamise tõttu lõuendi ääres ei jääks joonistamata
-    lõpp = matemaatilineX(canvas.width) + 10;
+    lõpp = matemaatilineX(l.width, l) + 10;
     // Lisame murdjoone punktid, 0.1 sammude kaupa
-    for (var x = 0; x < lõpp; x += 0.1) {
-        ctx.lineTo(lõuendiX(x), lõuendiY(f(x)));
+    for (let x = 0; x < lõpp; x += 0.1) {
+        l.kontekst.lineTo(lõuendiX(x, l), lõuendiY(funktsioon(x), l));
     }
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = 2;
-    ctx.stroke();
+    l.kontekst.strokeStyle = värv;
+    l.kontekst.lineWidth = 2;
+    l.kontekst.stroke();
+}
 
-    // telgede tähised
-    ctx.font = "24px serif";
-    ctx.fillText("y", lõuendiX(0.25), 20);
-    ctx.fillText("x", canvas.width-20, lõuendiY(0.25))
+function joonistaTelgedeTähised(l) {
+    l.kontekst.font = "20px serif";
+    l.kontekst.fillText("y", lõuendiX(0, l)+10, 20);
+    l.kontekst.fillText("x", l.width-20, lõuendiY(0, l)-10)
+}
+
+function joonistaPunktiirid(l, x, f1, f2) {
+    l.kontekst.setLineDash([3, 3]);
+    l.kontekst.strokeStyle = "#333333";
+    l.kontekst.lineWidth = 1;
+
+    l.kontekst.beginPath();
+    l.kontekst.moveTo(lõuendiX(x, l), lõuendiY(f1(x), l));
+    l.kontekst.lineTo(lõuendiX(x, l), lõuendiY(0, l));
+    l.kontekst.stroke();
+
+    l.kontekst.beginPath();
+    l.kontekst.moveTo(lõuendiX(x, l), lõuendiY(f2(x), l));
+    l.kontekst.lineTo(lõuendiX(x, l), lõuendiY(0, l));
+    l.kontekst.stroke();
+
+    l.kontekst.setLineDash([]);
+
+    l.kontekst.fillText("1+h", lõuendiX(x, l), lõuendiY(0, l)+8);
+}
+
+function joonista(l) {
+    // kustuta lõuend
+    l.kontekst.clearRect(0, 0, l.width, l.height);
+
+    joonistaTaust(l);
+
+    switch(l.indeks) {
+        case 0:
+            joonistaGraafik(l, f, "blue");
+            break;
+        case 1:
+            joonistaGraafik(l, kolmlnx, "orange");
+            joonistaGraafik(l, üksmiinusxruudus, "red");
+            break;
+        case 2:
+            joonistaGraafik(l, kolmlnx, "orange");
+            joonistaGraafik(l, üksmiinusxruudus, "red");
+            joonistaPunktiirid(l, 1.1, kolmlnx, üksmiinusxruudus);
+            break;
+        case 3:
+            joonistaGraafik(l, kolmlnx, "orange");
+            joonistaGraafik(l, kolmx, "gray");
+            break;
+        case 4:
+            joonistaGraafik(l, f, "blue");
+            // TODO horisontaalne joon
+            break;
+    }
+
+    joonistaTelgedeTähised(l);
+
 }
 
 // tuvastab, kui lõuendi suurus muutub (näiteks brauseri akent suurendades)
 // allikas: https://stackoverflow.com/a/73831830
-const observer = new ResizeObserver((entries) => {
-  canvas.width = canvas.clientWidth;
-  canvas.height = canvas.clientHeight;
 
-  joonista();
-});
-observer.observe(canvas);
+for (let i = 0; i < lõuendid.length; i++) {
+    let praeguneLõuend = lõuendid[i];
+    const observer = new ResizeObserver((entries) => {
+        praeguneLõuend.width = praeguneLõuend.clientWidth;
+        praeguneLõuend.height = praeguneLõuend.clientHeight;
+
+        joonista(praeguneLõuend);
+    });
+    observer.observe(lõuendid[i]);
+}
+
 
 
 // lihtsuse mõttes valime kõik nupud, mis on kindlas klassis, ja anname neile
@@ -213,3 +308,25 @@ for (var klass = 0; klass < nupuklassid.length; klass++) {
         nupud[i].addEventListener("click", vastavadFunktsioonid[klass]);
     }
 }
+
+var suurendusnupp = document.querySelectorAll("#suurendusnupp")[0];
+suurendusnupp.addEventListener("click", function() {
+
+    var progress = 0;
+    var algneNiheX = lõuendid[1].niheX;
+    var algneNiheY = lõuendid[1].niheY;
+    var algneSuum = lõuendid[1].suum;
+
+    var intervalID = window.setInterval(function() {
+        if (progress >= 1) {
+            window.clearInterval(intervalID);
+        }
+
+        lõuendid[1].niheX = suurendatud_niheX * progress + algneNiheX * (1-progress);
+        lõuendid[1].niheY = algneNiheY * (1-progress);
+        lõuendid[1].suum = suurendatud_suum * progress + algneSuum * (1-progress);
+        joonista(lõuendid[1]);
+
+        progress += 0.01;
+    }, 10)
+});

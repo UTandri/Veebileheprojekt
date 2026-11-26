@@ -38,7 +38,7 @@
             Selle funktsiooni graafik näeb välja selline:
         </p>
 
-        <canvas id="fx">
+        <canvas class="lhospitalgraafik">
             Algne funktsiooni
             <math class="blockmath">
                 <mi>f</mi>
@@ -48,9 +48,9 @@
             </math>
             graafik
         </canvas>
-        <button class="suumisisse">+</button>
-        <button class="suumivälja">-</button>
-        <button class="lähtestavaade">Lähtesta vaade</button>
+        <button class="suumisisse" data-graafiku-number="0">+</button>
+        <button class="suumivälja" data-graafiku-number="0">-</button>
+        <button class="lähtestavaade" data-graafiku-number="0">Lähtesta vaade</button>
 
         <p>
             Graafikult näib see funktsioon oma määramispiirkonnas pidev.
@@ -123,9 +123,8 @@
             Näiteks avaldist algebraliselt lihtsustada ei saa.
         </p>
 
-        <!--Siin võiks olla mõni mõtlemapanev paus, äkki mingid
-        ilusti disainitud mõttepunktid (...)
-        või horisontaalne joon-->
+        <br>
+        <hr>
         <br>
 
         <p>
@@ -142,7 +141,26 @@
             eraldi funktsioonidena. Allpool on näha nende graafikud eraldi.
         </p>
 
-        <!--3ln(x) ja 1-x^2 graafikud, äkki x=1 on kuidagi esile toodud-->
+        <canvas class="lhospitalgraafik">
+            Funktsioonide
+            <math class="blockmath">
+                <mn>3</mn>
+                <mi>ln</mi>
+                <mi>x</mi>
+            </math>
+            ja
+            <math class="blockmath">
+                <mn>1</mn>
+                <mo>-</mo>
+                <mi>x</mi>
+                <mo>^</mo>
+                <mn>2</mn>
+            </math>
+            graafikud
+        </canvas>
+        <button class="suumisisse" data-graafiku-number="1">+</button>
+        <button class="suumivälja" data-graafiku-number="1">-</button>
+        <button class="lähtestavaade" data-graafiku-number="1">Lähtesta vaade</button>
 
         <p>
             Nagu näha, on tõepoolest kohal 
@@ -150,12 +168,12 @@
             mõlemate funktsioonide väärtus
             <math class="inlinemath"><mn>0</mn></math>.
             Üks huvitav omadus ilmneb, kui sellele kohale sisse suurendada:
+            <button id="suurendusnupp">Suurenda!</button>
         </p>
 
-        <!--
-        3ln(x) ja -x^2 graafikud koos nupuga,
-        millele vajutades suurendatakse sisse kohale x=1
-        -->
+        <br>
+        <hr>
+        <br>
 
         <p>
             Mida lähemal me oleme kohale 
@@ -196,9 +214,26 @@
             <math class="inlinemath"><mn>0,01</mn></math>.
         </p>
 
-        <!--sisse suurendatud graafik, kus on märge kohal x+h
-            ning punktiir x-teljelt funktsioonide graafikuteni
-        -->
+        <canvas class="lhospitalgraafik">
+            Funktsioonide
+            <math class="blockmath">
+                <mn>3</mn>
+                <mi>ln</mi>
+                <mi>x</mi>
+            </math>
+            ja
+            <math class="blockmath">
+                <mn>1</mn>
+                <mo>-</mo>
+                <mi>x</mi>
+                <mo>^</mo>
+                <mn>2</mn>
+            </math>
+            graafikud koos punktiiridega kohal x+h.
+        </canvas>
+        <button class="suumisisse" data-graafiku-number="2">+</button>
+        <button class="suumivälja" data-graafiku-number="2">-</button>
+        <button class="lähtestavaade" data-graafiku-number="2">Lähtesta vaade</button>
         
         <p>
             Kohal
@@ -223,10 +258,6 @@
             </math>.
         </p>
 
-        <!--graafik, kus on tegelik funktsioon ja sama tõusuga lineaarne funktsioon
-            ning on samuti märge kohal x+h
-        -->
-
         <p>
             Mida suurem on
             <math class="inlinemath">
@@ -239,6 +270,27 @@
             </math>
             läheneb nullile, läheneb lineaarne võrrand funktsiooni päris väärtusele.
         </p>
+
+        <canvas class="lhospitalgraafik">
+            Funktsioonide
+            <math class="blockmath">
+                <mn>3</mn>
+                <mi>ln</mi>
+                <mi>x</mi>
+            </math>
+            ja
+            <math class="blockmath">
+                <mn>1</mn>
+                <mo>-</mo>
+                <mi>x</mi>
+                <mo>^</mo>
+                <mn>2</mn>
+            </math>
+            graafikud koos punktiiridega kohal x+h.
+        </canvas>
+        <button class="suumisisse" data-graafiku-number="3">+</button>
+        <button class="suumivälja" data-graafiku-number="3">-</button>
+        <button class="lähtestavaade" data-graafiku-number="3">Lähtesta vaade</button>
 
         <p>
             Sama saab teha murrujoonest allpool oleva funktsiooniga. Selle tegelik väärtus kohal
@@ -371,7 +423,7 @@
                 </msub>
             </math>.
 
-            Selleks peame leida funktsioonide päris tõusud kohal
+            Selleks peame leidma funktsioonide päris tõusud kohal
             <math class="inlinemath">
                 <mi>x</mi>
                 <mo>=</mo>
@@ -451,8 +503,31 @@
             <mn>1.5</mn>
         </math>
 
+        <p>Näeme graafikult, et vastus klapib:</p>
+
+        <canvas class="lhospitalgraafik">
+            Funktsioonide
+            <math class="blockmath">
+                <mn>3</mn>
+                <mi>ln</mi>
+                <mi>x</mi>
+            </math>
+            ja
+            <math class="blockmath">
+                <mn>1</mn>
+                <mo>-</mo>
+                <mi>x</mi>
+                <mo>^</mo>
+                <mn>2</mn>
+            </math>
+            graafikud koos punktiiridega kohal x+h.
+        </canvas>
+        <button class="suumisisse" data-graafiku-number="4">+</button>
+        <button class="suumivälja" data-graafiku-number="4">-</button>
+        <button class="lähtestavaade" data-graafiku-number="4">Lähtesta vaade</button>
+
         <p>
-            Leidsimegi funktsioonide jagatise, kui
+            Ehk siis leidsime funktsioonide jagatise, kui
             <math class="inlinemath">
                 <mi>x</mi>
             </math>
@@ -460,10 +535,9 @@
             <math class="inlinemath">
                 <mi>3</mi>
             </math>
-            ning selleks kasutasime funktsioonide tuletisi antud kohas.
+            ning selleks me ei pidanudki teadma funktsioonide enda väärtust,
+            vaid kasutasime funktsioonide tuletisi samas kohas.
         </p>
-
-        <!--Algse funktsiooni graafik punktiiriga y=-1.5-->
         
         <p>
             Üldistades saamegi L'Hospitali reegli:

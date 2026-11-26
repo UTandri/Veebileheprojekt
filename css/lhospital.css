@@ -28,3 +28,12 @@ canvas {
     border: 1px solid;
     border-color: gray;
 }
+
+#suurendusnupp {
+    display: inline;
+}
+
+p {
+    margin-bottom: 1em;
+    margin-top: 1em;
+}
