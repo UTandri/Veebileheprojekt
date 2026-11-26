@@ -151,3 +151,6 @@ footer {
     color: #64748b;
     font-size: 14px;
 }
+body:not(:has(.hero-section))::before {
+    display: none;
+}
